@@ -6,19 +6,25 @@
 import SwiftUI
 
 struct PrimaryButton: View {
+    @State private var sparkleTrigger = 0
+
     let title: String
     var systemImage: String?
     var isDisabled = false
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            sparkleTrigger += 1
+            action()
+        } label: {
             HStack(spacing: AlineaSpacing.xs) {
                 Text(title)
 
 //                if let systemImage {
 //                    Image(systemName: systemImage)
 //                        .font(.system(size: 16, weight: .bold))
+//                        .symbolEffect(.bounce, value: sparkleTrigger)
 //                }
             }
             .font(AlineaFonts.headline)
@@ -36,8 +42,12 @@ struct PrimaryButton: View {
             .shadow(color: AlineaColors.primaryPurple.opacity(isDisabled ? 0 : 0.42), radius: 18, x: 0, y: 10)
             .shadow(color: AlineaColors.violet.opacity(isDisabled ? 0 : 0.18), radius: 8, x: 0, y: 2)
             .opacity(isDisabled ? 0.48 : 1)
+            .overlay(alignment: .topTrailing) {
+                SparkleBurst(trigger: sparkleTrigger, tint: Color.white)
+                    .offset(x: -30, y: 12)
+            }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.delightfulPress)
         .disabled(isDisabled)
         .accessibilityLabel(title)
     }

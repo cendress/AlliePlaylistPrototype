@@ -6,6 +6,10 @@
 import SwiftUI
 
 struct MockLineChart: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var drawProgress: CGFloat = 0
+    @State private var showEndpoint = false
+
     var values: [Double] = [18, 21, 19, 28, 24, 34, 31, 42, 38, 52, 64, 71]
     var tint: Color = AlineaColors.primaryPurple
 
@@ -30,12 +34,15 @@ struct MockLineChart: View {
                             endPoint: .bottom
                         )
                     )
+                    .opacity(showEndpoint ? 1 : 0)
 
                 chartPath(in: proxy.size)
+                    .trim(from: 0, to: drawProgress)
                     .stroke(tint.opacity(0.36), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                     .blur(radius: 5)
 
                 chartPath(in: proxy.size)
+                    .trim(from: 0, to: drawProgress)
                     .stroke(
                         LinearGradient(
                             colors: [AlineaColors.allieInnerPink, tint, AlineaColors.infoBlue],
@@ -54,12 +61,33 @@ struct MockLineChart: View {
                                 .stroke(tint, lineWidth: 3)
                         }
                         .shadow(color: tint.opacity(0.55), radius: 10, x: 0, y: 0)
+                        .scaleEffect(showEndpoint ? 1 : 0.35)
+                        .opacity(showEndpoint ? 1 : 0)
                         .position(last)
                 }
             }
         }
         .frame(height: 126)
+        .onAppear(perform: animateChart)
         .polishedEntrance()
+    }
+
+    private func animateChart() {
+        guard drawProgress == 0 else { return }
+
+        if reduceMotion {
+            drawProgress = 1
+            showEndpoint = true
+            return
+        }
+
+        withAnimation(.easeOut(duration: 0.95).delay(0.16)) {
+            drawProgress = 1
+        }
+
+        withAnimation(.spring(response: 0.34, dampingFraction: 0.62).delay(0.88)) {
+            showEndpoint = true
+        }
     }
 
     private func chartPath(in size: CGSize) -> Path {

@@ -6,6 +6,8 @@
 import SwiftUI
 
 struct ChoiceChip: View {
+    @State private var sparkleTrigger = 0
+
     let title: String
     var isSelected = false
     let action: () -> Void
@@ -17,7 +19,12 @@ struct ChoiceChip: View {
     }
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            if !isSelected {
+                sparkleTrigger += 1
+            }
+            action()
+        } label: {
             Text(title)
                 .font(AlineaFonts.callout)
                 .foregroundStyle(isSelected ? AlineaColors.textPrimary : AlineaColors.textSecondary)
@@ -38,8 +45,12 @@ struct ChoiceChip: View {
                 }
                 .shadow(color: AlineaColors.primaryPurple.opacity(isSelected ? 0.34 : 0), radius: 14, x: 0, y: 7)
                 .scaleEffect(isSelected ? 1.02 : 1)
+                .overlay(alignment: .topTrailing) {
+                    SparkleBurst(trigger: sparkleTrigger, tint: AlineaColors.allieInnerPink)
+                        .offset(x: -4, y: 7)
+                }
                 .animation(.spring(response: 0.28, dampingFraction: 0.82), value: isSelected)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.delightfulPress)
     }
 }

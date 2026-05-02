@@ -6,12 +6,19 @@
 import SwiftUI
 
 struct StockRecommendationCard: View {
+    @State private var sparkleTrigger = 0
+
     let stock: StockRecommendation
     var isSelected = true
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
+        Button {
+            if !isSelected {
+                sparkleTrigger += 1
+            }
+            onTap()
+        } label: {
             HStack(alignment: .top, spacing: AlineaSpacing.md) {
                 TickerBadge(ticker: stock.ticker, color: stock.accentColor)
 
@@ -52,6 +59,10 @@ struct StockRecommendationCard: View {
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "plus.circle")
                     .font(.system(size: 21, weight: .semibold))
                     .foregroundStyle(isSelected ? AlineaColors.primaryPurple : AlineaColors.textTertiary)
+                    .symbolEffect(.bounce, value: sparkleTrigger)
+                    .overlay {
+                        SparkleBurst(trigger: sparkleTrigger, tint: stock.accentColor)
+                    }
             }
             .padding(AlineaSpacing.md)
             .background {
@@ -65,7 +76,7 @@ struct StockRecommendationCard: View {
             .shadow(color: AlineaColors.primaryPurple.opacity(isSelected ? 0.14 : 0), radius: 18, x: 0, y: 8)
             .animation(.spring(response: 0.28, dampingFraction: 0.86), value: isSelected)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.delightfulPress)
         .polishedEntrance()
     }
 }

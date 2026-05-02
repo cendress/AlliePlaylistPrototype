@@ -271,6 +271,6 @@ private struct SecondaryActionButton: View {
                         .stroke(AlineaColors.border, lineWidth: 1)
                 }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.delightfulPress)
     }
 }

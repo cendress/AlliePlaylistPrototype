@@ -55,7 +55,7 @@ struct SelectableCard: View {
             .shadow(color: AlineaColors.primaryPurple.opacity(isSelected ? 0.28 : 0), radius: 22, x: 0, y: 10)
             .animation(.spring(response: 0.28, dampingFraction: 0.86), value: isSelected)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.delightfulPress)
         .polishedEntrance()
     }
 }
