@@ -16,14 +16,9 @@ struct ScreenHeader: View {
             HStack {
                 if let onBack {
                     Button(action: onBack) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 15, weight: .bold))
+                        Image(systemName: "arrow.left")
+                            .font(.system(size: 22, weight: .bold))
                             .foregroundStyle(AlineaColors.textPrimary)
-                            .frame(width: 38, height: 38)
-                            .background {
-                                Circle()
-                                    .fill(AlineaColors.elevatedCard)
-                            }
                     }
                     .buttonStyle(.plain)
                 }
