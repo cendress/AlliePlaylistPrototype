@@ -30,11 +30,13 @@ struct AllieMessageCard: View {
         .padding(AlineaSpacing.lg)
         .background {
             RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                 .stroke(AlineaColors.border, lineWidth: 1)
         }
+        .shadow(color: AlineaColors.primaryPurple.opacity(0.08), radius: 18, x: 0, y: 8)
+        .polishedEntrance()
     }
 }

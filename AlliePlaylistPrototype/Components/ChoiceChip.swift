@@ -34,9 +34,11 @@ struct ChoiceChip: View {
                 }
                 .overlay {
                     Capsule()
-                        .stroke(isSelected ? AlineaColors.primaryPurple.opacity(0.72) : AlineaColors.border, lineWidth: 1)
+                        .stroke(isSelected ? Color.white.opacity(0.28) : AlineaColors.border, lineWidth: 1)
                 }
-                .shadow(color: AlineaColors.primaryPurple.opacity(isSelected ? 0.26 : 0), radius: 12, x: 0, y: 6)
+                .shadow(color: AlineaColors.primaryPurple.opacity(isSelected ? 0.34 : 0), radius: 14, x: 0, y: 7)
+                .scaleEffect(isSelected ? 1.02 : 1)
+                .animation(.spring(response: 0.28, dampingFraction: 0.82), value: isSelected)
         }
         .buttonStyle(.plain)
     }

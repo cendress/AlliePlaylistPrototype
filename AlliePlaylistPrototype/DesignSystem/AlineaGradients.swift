@@ -7,9 +7,30 @@ import SwiftUI
 
 enum AlineaGradients {
     static let primaryCTA = LinearGradient(
-        colors: [AlineaColors.primaryPurple],
+        colors: [
+            AlineaColors.primaryPurple
+        ],
         startPoint: .leading,
         endPoint: .trailing
+    )
+
+    static let appBackground = LinearGradient(
+        colors: [
+            AlineaColors.background,
+            Color(hex: "#120C1B"),
+            AlineaColors.background
+        ],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    static let cardSurface = LinearGradient(
+        colors: [
+            AlineaColors.elevatedCard.opacity(0.78),
+            AlineaColors.card
+        ],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
     )
 
     static let selectedChip = LinearGradient(

@@ -43,7 +43,7 @@ struct SuggestedStocksView: View {
             .padding(.bottom, 108)
         }
         .scrollIndicators(.hidden)
-        .background(AlineaColors.background.ignoresSafeArea())
+        .background(AlineaGradients.appBackground.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             BottomCTA(title: "Tune Playlist", action: onContinue)
         }
@@ -66,11 +66,12 @@ struct SuggestedStocksView: View {
         .frame(height: 48)
         .background {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .stroke(AlineaColors.border, lineWidth: 1)
         }
+        .polishedEntrance()
     }
 }

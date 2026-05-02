@@ -32,7 +32,8 @@ struct LivePlaylistDetailView: View {
                     title: "Thesis Health: Strong",
                     symbolName: "checkmark.seal.fill",
                     tint: AlineaColors.positiveGreen,
-                    message: "Still aligned with the original AI healthcare thesis."
+                    message: "Still aligned with the original AI healthcare thesis.",
+                    isPulsing: true
                 )
 
                 VStack(alignment: .leading, spacing: AlineaSpacing.md) {
@@ -66,12 +67,13 @@ struct LivePlaylistDetailView: View {
                 .padding(AlineaSpacing.lg)
                 .background {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                        .fill(AlineaColors.card)
+                        .fill(AlineaGradients.cardSurface)
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                         .stroke(AlineaColors.border, lineWidth: 1)
                 }
+                .polishedEntrance()
 
                 AllieMessageCard(
                     title: "Allie check-in",
@@ -83,7 +85,7 @@ struct LivePlaylistDetailView: View {
             .padding(.bottom, 142)
         }
         .scrollIndicators(.hidden)
-        .background(AlineaColors.background.ignoresSafeArea())
+        .background(AlineaGradients.appBackground.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             liveActions
         }
@@ -126,12 +128,13 @@ struct LivePlaylistDetailView: View {
         .padding(AlineaSpacing.lg)
         .background {
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: 28, style: .continuous)
                 .stroke(AlineaColors.border, lineWidth: 1)
         }
+        .polishedEntrance()
     }
 
     private var liveActions: some View {
@@ -145,7 +148,7 @@ struct LivePlaylistDetailView: View {
         }
         .padding(.horizontal, AlineaSpacing.screenHorizontal)
         .padding(.top, AlineaSpacing.md)
-        .padding(.bottom, AlineaSpacing.sm)
+        .padding(.bottom, AlineaSpacing.lg)
         .background {
             LinearGradient(
                 colors: [
@@ -184,20 +187,25 @@ private struct PerformanceStat: View {
         .padding(AlineaSpacing.md)
         .background {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .stroke(AlineaColors.border, lineWidth: 1)
         }
+        .polishedEntrance()
     }
 }
 
 private struct DetailInfoCard: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var pulse = false
+
     let title: String
     let symbolName: String
     let tint: Color
     let message: String
+    var isPulsing = false
 
     var body: some View {
         HStack(alignment: .top, spacing: AlineaSpacing.md) {
@@ -226,12 +234,19 @@ private struct DetailInfoCard: View {
         .padding(AlineaSpacing.lg)
         .background {
             RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                .stroke(AlineaColors.border, lineWidth: 1)
+                .stroke(isPulsing ? tint.opacity(pulse ? 0.48 : 0.2) : AlineaColors.border, lineWidth: 1)
         }
+        .shadow(color: tint.opacity(isPulsing ? (pulse ? 0.28 : 0.12) : 0), radius: 20, x: 0, y: 8)
+        .animation(.easeInOut(duration: 2.2).repeatForever(autoreverses: true), value: pulse)
+        .onAppear {
+            guard isPulsing, !reduceMotion else { return }
+            pulse = true
+        }
+        .polishedEntrance()
     }
 }
 

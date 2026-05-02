@@ -13,7 +13,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            AlineaColors.background
+            AlineaGradients.appBackground
                 .ignoresSafeArea()
 
             currentScreen
@@ -82,5 +82,4 @@ struct ContentView: View {
         guard let previous = currentStep.previous else { return }
         currentStep = previous
     }
-
 }

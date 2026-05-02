@@ -21,7 +21,7 @@ struct BottomCTA: View {
             LinearGradient(
                 colors: [
                     AlineaColors.background.opacity(0),
-                    AlineaColors.background.opacity(0.9),
+                    AlineaColors.background.opacity(0.94),
                     AlineaColors.background
                 ],
                 startPoint: .top,
@@ -29,5 +29,6 @@ struct BottomCTA: View {
             )
             .ignoresSafeArea()
         }
+        .padding(.bottom, AlineaSpacing.xs)
     }
 }

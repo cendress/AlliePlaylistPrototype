@@ -38,7 +38,7 @@ struct InvestmentThesisView: View {
             .padding(.bottom, 108)
         }
         .scrollIndicators(.hidden)
-        .background(AlineaColors.background.ignoresSafeArea())
+        .background(AlineaGradients.appBackground.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             BottomCTA(title: "See Playlist", action: onContinue)
         }
@@ -65,11 +65,12 @@ struct InvestmentThesisView: View {
         .padding(AlineaSpacing.lg)
         .background {
             RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: 26, style: .continuous)
                 .stroke(AlineaColors.border, lineWidth: 1)
         }
+        .polishedEntrance()
     }
 }

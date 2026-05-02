@@ -16,10 +16,10 @@ struct PrimaryButton: View {
             HStack(spacing: AlineaSpacing.xs) {
                 Text(title)
 
-                if let systemImage {
-                    Image(systemName: systemImage)
-                        .font(.system(size: 16, weight: .bold))
-                }
+//                if let systemImage {
+//                    Image(systemName: systemImage)
+//                        .font(.system(size: 16, weight: .bold))
+//                }
             }
             .font(AlineaFonts.headline)
             .foregroundStyle(AlineaColors.textPrimary)
@@ -31,9 +31,10 @@ struct PrimaryButton: View {
             }
             .overlay {
                 Capsule()
-                    .stroke(Color.white.opacity(0.16), lineWidth: 1)
+                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
             }
-            .shadow(color: AlineaColors.primaryPurple.opacity(isDisabled ? 0 : 0.34), radius: 18, x: 0, y: 10)
+            .shadow(color: AlineaColors.primaryPurple.opacity(isDisabled ? 0 : 0.42), radius: 18, x: 0, y: 10)
+            .shadow(color: AlineaColors.violet.opacity(isDisabled ? 0 : 0.18), radius: 8, x: 0, y: 2)
             .opacity(isDisabled ? 0.48 : 1)
         }
         .buttonStyle(.plain)

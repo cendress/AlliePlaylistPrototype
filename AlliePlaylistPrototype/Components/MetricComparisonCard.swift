@@ -36,11 +36,12 @@ struct MetricComparisonCard: View {
         .padding(AlineaSpacing.lg)
         .background {
             RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                 .stroke(AlineaColors.border, lineWidth: 1)
         }
+        .polishedEntrance()
     }
 }

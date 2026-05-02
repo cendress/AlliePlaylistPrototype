@@ -15,7 +15,7 @@ struct MockLineChart: View {
                 VStack(spacing: 0) {
                     ForEach(0..<4, id: \.self) { _ in
                         Rectangle()
-                            .fill(AlineaColors.border)
+                            .fill(Color.white.opacity(0.06))
                             .frame(height: 1)
 
                         Spacer()
@@ -25,11 +25,15 @@ struct MockLineChart: View {
                 chartFill(in: proxy.size)
                     .fill(
                         LinearGradient(
-                            colors: [tint.opacity(0.26), tint.opacity(0)],
+                            colors: [tint.opacity(0.24), tint.opacity(0.02)],
                             startPoint: .top,
                             endPoint: .bottom
                         )
                     )
+
+                chartPath(in: proxy.size)
+                    .stroke(tint.opacity(0.36), style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                    .blur(radius: 5)
 
                 chartPath(in: proxy.size)
                     .stroke(
@@ -40,9 +44,22 @@ struct MockLineChart: View {
                         ),
                         style: StrokeStyle(lineWidth: 3.5, lineCap: .round, lineJoin: .round)
                     )
+
+                if let last = chartPoints(in: proxy.size).last {
+                    Circle()
+                        .fill(AlineaColors.textPrimary)
+                        .frame(width: 9, height: 9)
+                        .overlay {
+                            Circle()
+                                .stroke(tint, lineWidth: 3)
+                        }
+                        .shadow(color: tint.opacity(0.55), radius: 10, x: 0, y: 0)
+                        .position(last)
+                }
             }
         }
         .frame(height: 126)
+        .polishedEntrance()
     }
 
     private func chartPath(in size: CGSize) -> Path {
@@ -52,8 +69,18 @@ struct MockLineChart: View {
         guard let first = points.first else { return path }
         path.move(to: first)
 
-        for point in points.dropFirst() {
-            path.addLine(to: point)
+        for index in 1..<points.count {
+            let previous = points[index - 1]
+            let current = points[index]
+            let midpoint = CGPoint(
+                x: (previous.x + current.x) / 2,
+                y: (previous.y + current.y) / 2
+            )
+            path.addQuadCurve(to: midpoint, control: previous)
+        }
+
+        if let last = points.last {
+            path.addLine(to: last)
         }
 
         return path
@@ -67,9 +94,17 @@ struct MockLineChart: View {
         path.move(to: CGPoint(x: first.x, y: size.height))
         path.addLine(to: first)
 
-        for point in points.dropFirst() {
-            path.addLine(to: point)
+        for index in 1..<points.count {
+            let previous = points[index - 1]
+            let current = points[index]
+            let midpoint = CGPoint(
+                x: (previous.x + current.x) / 2,
+                y: (previous.y + current.y) / 2
+            )
+            path.addQuadCurve(to: midpoint, control: previous)
         }
+
+        path.addLine(to: last)
 
         path.addLine(to: CGPoint(x: last.x, y: size.height))
         path.closeSubpath()

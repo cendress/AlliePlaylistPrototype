@@ -73,12 +73,13 @@ struct TunePlaylistView: View {
                 .padding(AlineaSpacing.lg)
                 .background {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                        .fill(AlineaColors.card)
+                        .fill(AlineaGradients.cardSurface)
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                         .stroke(AlineaColors.border, lineWidth: 1)
                 }
+                .polishedEntrance()
 
                 AllieMessageCard(
                     title: "Allie adjusted the mix",
@@ -91,7 +92,7 @@ struct TunePlaylistView: View {
             .padding(.bottom, 108)
         }
         .scrollIndicators(.hidden)
-        .background(AlineaColors.background.ignoresSafeArea())
+        .background(AlineaGradients.appBackground.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             BottomCTA(title: "Finalize Playlist", action: onContinue)
         }

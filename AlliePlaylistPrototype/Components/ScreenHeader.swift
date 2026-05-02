@@ -36,6 +36,7 @@ struct ScreenHeader: View {
                 .foregroundStyle(AlineaColors.textPrimary)
                 .multilineTextAlignment(.leading)
                 .lineLimit(3)
+                .minimumScaleFactor(0.84)
 
             if let subtitle {
                 Text(subtitle)
@@ -45,5 +46,6 @@ struct ScreenHeader: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .polishedEntrance()
     }
 }

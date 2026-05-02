@@ -53,12 +53,13 @@ struct CustomizePlaylistView: View {
                 .padding(AlineaSpacing.lg)
                 .background {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                        .fill(AlineaColors.card)
+                        .fill(AlineaGradients.cardSurface)
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                         .stroke(AlineaColors.border, lineWidth: 1)
                 }
+                .polishedEntrance()
 
                 VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
                     Text("Description")
@@ -74,12 +75,13 @@ struct CustomizePlaylistView: View {
                 .padding(AlineaSpacing.lg)
                 .background {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                        .fill(AlineaColors.card)
+                        .fill(AlineaGradients.cardSurface)
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                         .stroke(AlineaColors.border, lineWidth: 1)
                 }
+                .polishedEntrance()
 
                 AllieMessageCard(
                     title: "Allie",
@@ -91,7 +93,7 @@ struct CustomizePlaylistView: View {
             .padding(.bottom, 108)
         }
         .scrollIndicators(.hidden)
-        .background(AlineaColors.background.ignoresSafeArea())
+        .background(AlineaGradients.appBackground.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             BottomCTA(title: "Save Playlist", systemImage: "checkmark", action: onContinue)
         }
@@ -124,11 +126,13 @@ struct CustomizePlaylistView: View {
         .padding(AlineaSpacing.xl)
         .background {
             RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(AlineaColors.card)
+                .fill(AlineaGradients.cardSurface)
         }
         .overlay {
             RoundedRectangle(cornerRadius: 30, style: .continuous)
                 .stroke(AlineaColors.border, lineWidth: 1)
         }
+        .shadow(color: viewModel.selectedPlaylistColor.color.opacity(0.16), radius: 24, x: 0, y: 12)
+        .polishedEntrance()
     }
 }

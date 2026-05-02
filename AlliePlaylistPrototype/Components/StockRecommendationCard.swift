@@ -56,13 +56,16 @@ struct StockRecommendationCard: View {
             .padding(AlineaSpacing.md)
             .background {
                 RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
-                    .fill(isSelected ? AlineaColors.elevatedCard : AlineaColors.card)
+                    .fill(isSelected ? AlineaGradients.cardSurface : LinearGradient(colors: [AlineaColors.card], startPoint: .top, endPoint: .bottom))
             }
             .overlay {
                 RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                     .stroke(isSelected ? AlineaColors.primaryPurple.opacity(0.58) : AlineaColors.border, lineWidth: 1)
             }
+            .shadow(color: AlineaColors.primaryPurple.opacity(isSelected ? 0.14 : 0), radius: 18, x: 0, y: 8)
+            .animation(.spring(response: 0.28, dampingFraction: 0.86), value: isSelected)
         }
         .buttonStyle(.plain)
+        .polishedEntrance()
     }
 }

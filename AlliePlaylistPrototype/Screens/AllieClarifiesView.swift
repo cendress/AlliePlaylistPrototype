@@ -43,7 +43,7 @@ struct AllieClarifiesView: View {
             .padding(.bottom, 108)
         }
         .scrollIndicators(.hidden)
-        .background(AlineaColors.background.ignoresSafeArea())
+        .background(AlineaGradients.appBackground.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             BottomCTA(title: "Continue", action: onContinue)
         }

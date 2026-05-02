@@ -19,16 +19,16 @@ struct BeliefPromptView: View {
             VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
                 ScreenHeader(
                     eyebrow: "Step 1 of 7",
-                    title: "Build a playlist with Allie",
-                    subtitle: "Start with what you believe, not a ticker list.",
+                    title: "Build a playlist",
+                    subtitle: "Start with what you believe in.",
                     onBack: onBack
                 )
 
-                Text("What do you believe is changing?")
-                    .font(AlineaFonts.massiveTitle)
-                    .foregroundStyle(AlineaColors.textPrimary)
-                    .lineLimit(3)
-                    .minimumScaleFactor(0.86)
+//                Text("What do you believe is changing?")
+//                    .font(AlineaFonts.hugeTitle)
+//                    .foregroundStyle(AlineaColors.textPrimary)
+//                    .lineLimit(3)
+//                    .minimumScaleFactor(0.86)
 
                 AllieMessageCard(
                     title: "Allie",
@@ -57,7 +57,7 @@ struct BeliefPromptView: View {
             .padding(.bottom, 108)
         }
         .scrollIndicators(.hidden)
-        .background(AlineaColors.background.ignoresSafeArea())
+        .background(AlineaGradients.appBackground.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
             BottomCTA(title: "Build with Allie", systemImage: "sparkles", action: onContinue)
         }
@@ -87,5 +87,6 @@ struct BeliefPromptView: View {
                 .stroke(AlineaColors.primaryPurple.opacity(0.32), lineWidth: 1)
         }
         .shadow(color: AlineaColors.primaryPurple.opacity(0.16), radius: 18, x: 0, y: 8)
+        .polishedEntrance()
     }
 }
