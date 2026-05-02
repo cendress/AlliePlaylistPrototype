@@ -16,12 +16,17 @@ struct TunePlaylistView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AlineaSpacing.xl) {
+            VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
                 ScreenHeader(
                     eyebrow: "Step 5 of 7",
-                    title: "Tune your playlist",
-                    subtitle: "Choose a quick refinement. The mock metrics show how Allie might explain the adjustment.",
+                    title: "Tune the playlist",
+                    subtitle: PlaylistMockData.playlistName,
                     onBack: onBack
+                )
+
+                AllieMessageCard(
+                    title: "Allie",
+                    message: "Want this to feel safer, bolder, or more focused? I can adjust the mix around your comfort level."
                 )
 
                 LazyVGrid(columns: chipColumns, alignment: .leading, spacing: AlineaSpacing.sm) {
@@ -32,11 +37,54 @@ struct TunePlaylistView: View {
                     }
                 }
 
-                VStack(spacing: AlineaSpacing.md) {
-                    ForEach(PlaylistMockData.metricComparisons) { metric in
-                        MetricComparisonCard(metric: metric)
+                VStack(alignment: .leading, spacing: AlineaSpacing.md) {
+                    Text("Before and after")
+                        .font(AlineaFonts.caption)
+                        .foregroundStyle(AlineaColors.textTertiary)
+                        .textCase(.uppercase)
+
+                    VStack(spacing: AlineaSpacing.sm) {
+                        ForEach(PlaylistMockData.metricComparisons) { metric in
+                            MetricComparisonCard(metric: metric)
+                        }
                     }
                 }
+
+                VStack(alignment: .leading, spacing: AlineaSpacing.md) {
+                    HStack {
+                        Text("Simplified allocation")
+                            .font(AlineaFonts.caption)
+                            .foregroundStyle(AlineaColors.textTertiary)
+                            .textCase(.uppercase)
+
+                        Spacer()
+
+                        Text("Mock")
+                            .font(AlineaFonts.footnote)
+                            .foregroundStyle(AlineaColors.textTertiary)
+                    }
+
+                    VStack(spacing: AlineaSpacing.sm) {
+                        ForEach(PlaylistMockData.allocationItems) { item in
+                            AllocationRow(item: item)
+                        }
+                    }
+                }
+                .padding(AlineaSpacing.lg)
+                .background {
+                    RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
+                        .fill(AlineaColors.card)
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
+                        .stroke(AlineaColors.border, lineWidth: 1)
+                }
+
+                AllieMessageCard(
+                    title: "Allie adjusted the mix",
+                    message: "I reduced exposure to earlier-stage names and leaned more toward profitable infrastructure and healthcare leaders. It's slightly less pure, but more stable."
+                )
+
             }
             .padding(.horizontal, AlineaSpacing.screenHorizontal)
             .padding(.top, AlineaSpacing.lg)
@@ -45,7 +93,52 @@ struct TunePlaylistView: View {
         .scrollIndicators(.hidden)
         .background(AlineaColors.background.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
-            BottomCTA(title: "Customize look", action: onContinue)
+            BottomCTA(title: "Finalize Playlist", action: onContinue)
+        }
+    }
+}
+
+private struct AllocationRow: View {
+    let item: AllocationItem
+
+    private var progress: CGFloat {
+        min(CGFloat(item.weight / 24), 1)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            HStack(spacing: AlineaSpacing.sm) {
+                Text(item.companyName)
+                    .font(AlineaFonts.footnote)
+                    .foregroundStyle(AlineaColors.textPrimary)
+                    .lineLimit(1)
+
+                Text(item.ticker)
+                    .font(AlineaFonts.footnote)
+                    .foregroundStyle(AlineaColors.textTertiary)
+
+                Spacer(minLength: 0)
+
+                Text("\(Int(item.weight))%")
+                    .font(AlineaFonts.footnote)
+                    .foregroundStyle(AlineaColors.textSecondary)
+            }
+
+            GeometryReader { proxy in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(AlineaColors.elevatedCard)
+
+                    Capsule()
+                        .fill(LinearGradient(
+                            colors: [item.tint, AlineaColors.primaryPurple],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        ))
+                        .frame(width: max(proxy.size.width * progress, 22))
+                }
+            }
+            .frame(height: 7)
         }
     }
 }

@@ -16,12 +16,17 @@ struct StockRecommendationCard: View {
                 TickerBadge(ticker: stock.ticker, color: stock.accentColor)
 
                 VStack(alignment: .leading, spacing: AlineaSpacing.xs) {
-                    HStack(spacing: AlineaSpacing.xs) {
-                        Text(stock.companyName)
-                            .font(AlineaFonts.headline)
-                            .foregroundStyle(AlineaColors.textPrimary)
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(alignment: .firstTextBaseline, spacing: AlineaSpacing.xs) {
+                            Text(stock.companyName)
+                                .font(AlineaFonts.headline)
+                                .foregroundStyle(AlineaColors.textPrimary)
+                                .lineLimit(1)
 
-                        Spacer()
+                            Text(stock.ticker)
+                                .font(AlineaFonts.footnote)
+                                .foregroundStyle(AlineaColors.textTertiary)
+                        }
 
                         Text(stock.category)
                             .font(AlineaFonts.footnote)
@@ -32,19 +37,23 @@ struct StockRecommendationCard: View {
                                 Capsule()
                                     .fill(stock.accentColor.opacity(0.14))
                             }
+                            .fixedSize(horizontal: true, vertical: false)
                     }
 
                     Text(stock.rationale)
                         .font(AlineaFonts.callout)
                         .foregroundStyle(AlineaColors.textSecondary)
-                        .lineSpacing(3)
+                        .lineLimit(2)
+                        .lineSpacing(2)
                 }
+
+                Spacer()
 
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "plus.circle")
                     .font(.system(size: 21, weight: .semibold))
                     .foregroundStyle(isSelected ? AlineaColors.primaryPurple : AlineaColors.textTertiary)
             }
-            .padding(AlineaSpacing.lg)
+            .padding(AlineaSpacing.md)
             .background {
                 RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                     .fill(isSelected ? AlineaColors.elevatedCard : AlineaColors.card)

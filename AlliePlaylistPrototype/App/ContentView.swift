@@ -68,7 +68,7 @@ struct ContentView: View {
         case .livePlaylistDetail:
             LivePlaylistDetailView(
                 viewModel: viewModel,
-                onContinue: restart,
+                onContinue: {},
                 onBack: goBack
             )
         }
@@ -83,7 +83,4 @@ struct ContentView: View {
         currentStep = previous
     }
 
-    private func restart() {
-        currentStep = .beliefPrompt
-    }
 }

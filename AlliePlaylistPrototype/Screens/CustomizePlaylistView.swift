@@ -12,28 +12,30 @@ struct CustomizePlaylistView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AlineaSpacing.xl) {
+            VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
                 ScreenHeader(
                     eyebrow: "Step 6 of 7",
-                    title: "Customize playlist",
-                    subtitle: "Pick a color mood before the playlist goes live.",
+                    title: "Make it yours",
+                    subtitle: "The playlist has a thesis. Now give it a little personality.",
                     onBack: onBack
                 )
 
+                playlistIdentityCard
+
                 VStack(alignment: .leading, spacing: AlineaSpacing.md) {
-                    Text("Playlist color")
+                    Text("Color")
                         .font(AlineaFonts.caption)
                         .foregroundStyle(AlineaColors.textTertiary)
                         .textCase(.uppercase)
 
-                    HStack(spacing: AlineaSpacing.md) {
+                    HStack(spacing: AlineaSpacing.sm) {
                         ForEach(PlaylistMockData.playlistColors) { option in
                             Button {
                                 viewModel.selectedPlaylistColor = option
                             } label: {
                                 Circle()
                                     .fill(AlineaGradients.playlistColor(option.color))
-                                    .frame(width: 46, height: 46)
+                                    .frame(width: 40, height: 40)
                                     .overlay {
                                         Circle()
                                             .stroke(
@@ -48,34 +50,41 @@ struct CustomizePlaylistView: View {
                         }
                     }
                 }
-
-                VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
-                    HStack(spacing: AlineaSpacing.md) {
-                        AllieAvatar(size: 64)
-                            .frame(width: 78, height: 78)
-
-                        VStack(alignment: .leading, spacing: AlineaSpacing.xs) {
-                            Text(PlaylistMockData.playlistName)
-                                .font(AlineaFonts.title1)
-                                .foregroundStyle(AlineaColors.textPrimary)
-
-                            Text("\(viewModel.selectedStockTickers.count) mock stocks, \(viewModel.selectedRefinement)")
-                                .font(AlineaFonts.callout)
-                                .foregroundStyle(AlineaColors.textSecondary)
-                        }
-                    }
-
-                    MockLineChart(tint: viewModel.selectedPlaylistColor.color)
-                }
                 .padding(AlineaSpacing.lg)
                 .background {
-                    RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                         .fill(AlineaColors.card)
                 }
                 .overlay {
-                    RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                         .stroke(AlineaColors.border, lineWidth: 1)
                 }
+
+                VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
+                    Text("Description")
+                        .font(AlineaFonts.caption)
+                        .foregroundStyle(AlineaColors.textTertiary)
+                        .textCase(.uppercase)
+
+                    Text(PlaylistMockData.playlistDescription)
+                        .font(AlineaFonts.body)
+                        .foregroundStyle(AlineaColors.textPrimary)
+                        .lineSpacing(4)
+                }
+                .padding(AlineaSpacing.lg)
+                .background {
+                    RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
+                        .fill(AlineaColors.card)
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
+                        .stroke(AlineaColors.border, lineWidth: 1)
+                }
+
+                AllieMessageCard(
+                    title: "Allie",
+                    message: "I gave it a name and description based on your thesis - feel free to make it yours."
+                )
             }
             .padding(.horizontal, AlineaSpacing.screenHorizontal)
             .padding(.top, AlineaSpacing.lg)
@@ -84,7 +93,42 @@ struct CustomizePlaylistView: View {
         .scrollIndicators(.hidden)
         .background(AlineaColors.background.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
-            BottomCTA(title: "Launch playlist", action: onContinue)
+            BottomCTA(title: "Save Playlist", systemImage: "checkmark", action: onContinue)
+        }
+    }
+
+    private var playlistIdentityCard: some View {
+        VStack(spacing: AlineaSpacing.lg) {
+            ZStack {
+                Circle()
+                    .fill(viewModel.selectedPlaylistColor.color.opacity(0.28))
+                    .frame(width: 162, height: 162)
+                    .blur(radius: 22)
+
+                AllieAvatar(size: 104)
+            }
+            .frame(maxWidth: .infinity)
+
+            VStack(spacing: AlineaSpacing.xs) {
+                Text(PlaylistMockData.playlistName)
+                    .font(AlineaFonts.largeTitle)
+                    .foregroundStyle(AlineaColors.textPrimary)
+                    .multilineTextAlignment(.center)
+
+                Text("\(viewModel.selectedStockTickers.count) companies, \(viewModel.selectedRefinement)")
+                    .font(AlineaFonts.callout)
+                    .foregroundStyle(AlineaColors.textSecondary)
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .padding(AlineaSpacing.xl)
+        .background {
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .fill(AlineaColors.card)
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .stroke(AlineaColors.border, lineWidth: 1)
         }
     }
 }

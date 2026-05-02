@@ -12,12 +12,19 @@ struct SuggestedStocksView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AlineaSpacing.xl) {
+            VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
                 ScreenHeader(
                     eyebrow: "Step 4 of 7",
-                    title: "Suggested stocks",
-                    subtitle: "Mock recommendations only. These cards are placeholders for the prototype flow.",
+                    title: "Allie's suggested playlist",
+                    subtitle: "A curated starting point for your AI healthcare thesis.",
                     onBack: onBack
+                )
+
+                searchBar
+
+                AllieMessageCard(
+                    title: "Allie",
+                    message: "I built a balanced mix for your AI healthcare thesis."
                 )
 
                 VStack(spacing: AlineaSpacing.md) {
@@ -38,7 +45,32 @@ struct SuggestedStocksView: View {
         .scrollIndicators(.hidden)
         .background(AlineaColors.background.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
-            BottomCTA(title: "Tune playlist", action: onContinue)
+            BottomCTA(title: "Tune Playlist", action: onContinue)
+        }
+    }
+
+    private var searchBar: some View {
+        HStack(spacing: AlineaSpacing.sm) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(AlineaColors.textTertiary)
+
+            Text("Search or ask Allie to add a company...")
+                .font(AlineaFonts.callout)
+                .foregroundStyle(AlineaColors.textTertiary)
+                .lineLimit(1)
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, AlineaSpacing.lg)
+        .frame(height: 48)
+        .background {
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(AlineaColors.card)
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(AlineaColors.border, lineWidth: 1)
         }
     }
 }

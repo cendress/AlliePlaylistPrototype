@@ -23,9 +23,20 @@ struct PlaylistColorOption: Identifiable, Equatable {
     }
 }
 
+struct AllocationItem: Identifiable {
+    var id: String { ticker }
+
+    let companyName: String
+    let ticker: String
+    let weight: Double
+    let tint: Color
+}
+
 enum PlaylistMockData {
     static let playlistName = "The Future of Care"
     static let userBelief = "AI is changing healthcare"
+    static let beliefInputValue = "AI is changing healthcare..."
+    static let playlistDescription = "A playlist for companies using AI to make healthcare more predictive, personalized, and efficient."
 
     static let beliefChips = [
         "AI in healthcare",
@@ -166,6 +177,15 @@ enum PlaylistMockData {
         "Healthcare earnings calls",
         "AI adoption in hospitals",
         "Labor shortages and automation demand"
+    ]
+
+    static let allocationItems = [
+        AllocationItem(companyName: "NVIDIA", ticker: "NVDA", weight: 22, tint: AlineaColors.healthcareGreen),
+        AllocationItem(companyName: "Microsoft", ticker: "MSFT", weight: 20, tint: AlineaColors.infoBlue),
+        AllocationItem(companyName: "GE HealthCare", ticker: "GEHC", weight: 17, tint: AlineaColors.cyan),
+        AllocationItem(companyName: "Intuitive Surgical", ticker: "ISRG", weight: 15, tint: AlineaColors.warningYellow),
+        AllocationItem(companyName: "Eli Lilly", ticker: "LLY", weight: 18, tint: AlineaColors.allieWarmOrange),
+        AllocationItem(companyName: "Tempus AI", ticker: "TEM", weight: 8, tint: AlineaColors.allieInnerPink)
     ]
 
     static let playlistColors = [

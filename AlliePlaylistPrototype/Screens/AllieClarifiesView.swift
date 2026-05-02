@@ -12,17 +12,17 @@ struct AllieClarifiesView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AlineaSpacing.xl) {
+            VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
                 ScreenHeader(
                     eyebrow: "Step 2 of 7",
-                    title: "Allie clarifies your angle",
-                    subtitle: "A belief can become a few different playlists. Pick the version that feels closest.",
+                    title: "Shape your idea",
+                    subtitle: "A thoughtful question before any stock suggestions.",
                     onBack: onBack
                 )
 
                 AllieMessageCard(
-                    title: "I found three paths",
-                    message: "For now, I will default to a balanced mix so the playlist feels diversified across the healthcare AI stack."
+                    title: "Allie",
+                    message: "Love this. AI in healthcare can mean a few different things. Which angle feels closest to your belief?"
                 )
 
                 VStack(spacing: AlineaSpacing.md) {
@@ -45,7 +45,7 @@ struct AllieClarifiesView: View {
         .scrollIndicators(.hidden)
         .background(AlineaColors.background.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
-            BottomCTA(title: "Build thesis", action: onContinue)
+            BottomCTA(title: "Continue", action: onContinue)
         }
     }
 }

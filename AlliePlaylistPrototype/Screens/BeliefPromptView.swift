@@ -16,36 +16,29 @@ struct BeliefPromptView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AlineaSpacing.xl) {
+            VStack(alignment: .leading, spacing: AlineaSpacing.lg) {
                 ScreenHeader(
                     eyebrow: "Step 1 of 7",
-                    title: "What do you believe?",
-                    subtitle: "Start with a simple market belief. Allie will turn it into a focused investing playlist.",
+                    title: "Build a playlist with Allie",
+                    subtitle: "Start with what you believe, not a ticker list.",
                     onBack: onBack
                 )
 
-                VStack(spacing: AlineaSpacing.lg) {
-                    AllieAvatar(size: 118)
+                Text("What do you believe is changing?")
+                    .font(AlineaFonts.massiveTitle)
+                    .foregroundStyle(AlineaColors.textPrimary)
+                    .lineLimit(3)
+                    .minimumScaleFactor(0.86)
 
-                    Text(PlaylistMockData.userBelief)
-                        .font(AlineaFonts.title1)
-                        .foregroundStyle(AlineaColors.textPrimary)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity)
-                }
-                .padding(.vertical, AlineaSpacing.xxl)
-                .padding(.horizontal, AlineaSpacing.lg)
-                .background {
-                    RoundedRectangle(cornerRadius: 28, style: .continuous)
-                        .fill(AlineaColors.card)
-                }
-                .overlay {
-                    RoundedRectangle(cornerRadius: 28, style: .continuous)
-                        .stroke(AlineaColors.border, lineWidth: 1)
-                }
+                AllieMessageCard(
+                    title: "Allie",
+                    message: "Tell me what you're noticing in the world - a trend, feeling, cultural moment, or conviction. I'll help turn it into an investable playlist."
+                )
+
+                beliefInputField
 
                 VStack(alignment: .leading, spacing: AlineaSpacing.md) {
-                    Text("Suggested beliefs")
+                    Text("Try a belief")
                         .font(AlineaFonts.caption)
                         .foregroundStyle(AlineaColors.textTertiary)
                         .textCase(.uppercase)
@@ -66,7 +59,33 @@ struct BeliefPromptView: View {
         .scrollIndicators(.hidden)
         .background(AlineaColors.background.ignoresSafeArea())
         .safeAreaInset(edge: .bottom) {
-            BottomCTA(title: "Continue", action: onContinue)
+            BottomCTA(title: "Build with Allie", systemImage: "sparkles", action: onContinue)
         }
+    }
+
+    private var beliefInputField: some View {
+        HStack(spacing: AlineaSpacing.sm) {
+            Image(systemName: "quote.bubble.fill")
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundStyle(AlineaColors.primaryPurple)
+
+            Text(PlaylistMockData.beliefInputValue)
+                .font(AlineaFonts.bodyMedium)
+                .foregroundStyle(AlineaColors.textPrimary)
+                .lineLimit(1)
+
+            Spacer()
+        }
+        .padding(.horizontal, AlineaSpacing.lg)
+        .frame(height: 58)
+        .background {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(AlineaColors.elevatedCard)
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(AlineaColors.primaryPurple.opacity(0.32), lineWidth: 1)
+        }
+        .shadow(color: AlineaColors.primaryPurple.opacity(0.16), radius: 18, x: 0, y: 8)
     }
 }
