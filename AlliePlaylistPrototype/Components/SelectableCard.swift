@@ -28,11 +28,11 @@ struct SelectableCard: View {
 
                 VStack(alignment: .leading, spacing: AlineaSpacing.xs) {
                     Text(title)
-                        .font(AlineaFonts.headline)
+                        .font(AlineaFonts.callout)
                         .foregroundStyle(AlineaColors.textPrimary)
 
                     Text(subtitle)
-                        .font(AlineaFonts.callout)
+                        .font(AlineaFonts.footnote)
                         .foregroundStyle(AlineaColors.textSecondary)
                         .lineSpacing(3)
                 }
@@ -43,7 +43,7 @@ struct SelectableCard: View {
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundStyle(isSelected ? AlineaColors.primaryPurple : AlineaColors.textTertiary)
             }
-            .padding(AlineaSpacing.lg)
+            .padding(AlineaSpacing.md)
             .background {
                 RoundedRectangle(cornerRadius: AlineaSpacing.cardRadius, style: .continuous)
                     .fill(isSelected ? AlineaGradients.cardSurface : LinearGradient(colors: [AlineaColors.card], startPoint: .top, endPoint: .bottom))
@@ -59,3 +59,4 @@ struct SelectableCard: View {
         .polishedEntrance()
     }
 }
+
