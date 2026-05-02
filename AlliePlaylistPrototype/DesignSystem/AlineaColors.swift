@@ -9,7 +9,7 @@ enum AlineaColors {
     static let background = Color(hex: "#0D0A12")
     static let card = Color(hex: "#171320")
     static let elevatedCard = Color(hex: "#211A2D")
-    static let primaryPurple = Color(hex: "#A100FF")
+    static let primaryPurple = Color(hex: "#AE42C9")
     static let violet = Color(hex: "#6F35FF")
 
     static let allieGlowWhite = Color(hex: "#FFFDF2")

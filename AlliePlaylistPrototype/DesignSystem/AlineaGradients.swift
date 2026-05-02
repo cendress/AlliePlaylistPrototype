@@ -7,7 +7,7 @@ import SwiftUI
 
 enum AlineaGradients {
     static let primaryCTA = LinearGradient(
-        colors: [AlineaColors.primaryPurple, AlineaColors.violet],
+        colors: [AlineaColors.primaryPurple],
         startPoint: .leading,
         endPoint: .trailing
     )
