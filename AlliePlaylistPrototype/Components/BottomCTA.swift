@@ -17,18 +17,18 @@ struct BottomCTA: View {
                 .padding(.top, AlineaSpacing.md)
                 .padding(.bottom, AlineaSpacing.sm)
         }
-        .background {
-            LinearGradient(
-                colors: [
-                    AlineaColors.background.opacity(0),
-                    AlineaColors.background.opacity(0.94),
-                    AlineaColors.background
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-        }
+//        .background {
+//            LinearGradient(
+//                colors: [
+//                    AlineaColors.background.opacity(0),
+//                    AlineaColors.background.opacity(0.94),
+//                    AlineaColors.background
+//                ],
+//                startPoint: .top,
+//                endPoint: .bottom
+//            )
+//            .ignoresSafeArea()
+//        }
         .padding(.bottom, AlineaSpacing.xs)
     }
 }
