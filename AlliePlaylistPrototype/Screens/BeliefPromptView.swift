@@ -24,11 +24,11 @@ struct BeliefPromptView: View {
                     onBack: onBack
                 )
 
-//                Text("What do you believe is changing?")
-//                    .font(AlineaFonts.headline)
-//                    .foregroundStyle(AlineaColors.textPrimary)
-//                    .lineLimit(3)
-//                    .minimumScaleFactor(0.86)
+                Text("What do you believe is changing?")
+                    .font(AlineaFonts.headline)
+                    .foregroundStyle(AlineaColors.textPrimary)
+                    .lineLimit(3)
+                    .minimumScaleFactor(0.86)
 
                 AllieMessageCard(
                     title: "Allie",
