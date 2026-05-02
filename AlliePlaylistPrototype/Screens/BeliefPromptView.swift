@@ -25,7 +25,7 @@ struct BeliefPromptView: View {
                 )
 
 //                Text("What do you believe is changing?")
-//                    .font(AlineaFonts.hugeTitle)
+//                    .font(AlineaFonts.headline)
 //                    .foregroundStyle(AlineaColors.textPrimary)
 //                    .lineLimit(3)
 //                    .minimumScaleFactor(0.86)

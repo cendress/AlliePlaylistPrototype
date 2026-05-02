@@ -16,7 +16,7 @@ struct InvestmentThesisView: View {
                 ScreenHeader(
                     eyebrow: "Step 3 of 7",
                     title: "Allie's thesis",
-                    subtitle: "More than stock picking: a clear reason this playlist exists.",
+                    subtitle: "A clear reason this playlist exists.",
                     onBack: onBack
                 )
 
@@ -46,8 +46,8 @@ struct InvestmentThesisView: View {
 
     private var playlistDraftCard: some View {
         HStack(spacing: AlineaSpacing.md) {
-            AllieAvatar(size: 58)
-                .frame(width: 72, height: 72)
+//            AllieAvatar(size: 58)
+//                .frame(width: 72, height: 72)
 
             VStack(alignment: .leading, spacing: AlineaSpacing.xs) {
                 Text("Playlist draft")
